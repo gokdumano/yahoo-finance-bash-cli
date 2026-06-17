@@ -27,16 +27,16 @@ cd yahoo-finance-bash-cli
 chmod +x yahoo_historical.sh
 ```
 
-
 📖 Usage
 
 The CLI operates in two modes depending on the number of arguments provided.
 
 1. Range Mode (3 Arguments)
 Use this mode for quick, human-readable timeframes.
-Syntax: ./yahoo_historical.sh <ticker> <range> <interval>
 
 ```bash
+# Syntax: ./yahoo_historical.sh <ticker> <range> <interval>
+
 # Fetch 1-month of daily data for Apple and save it to a CSV file
 ./yahoo_historical.sh AAPL 1mo 1d > AAPL_daily.csv
 
@@ -44,14 +44,15 @@ Syntax: ./yahoo_historical.sh <ticker> <range> <interval>
 ./yahoo_historical.sh THYAO.IS ytd 1wk > THYAO_weekly.csv
 ```
 
-Valid Ranges: 1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max
-Valid Intervals: 1m, 5m, 15m, 1h, 1d, 1wk, 1mo
+- Valid Ranges: 1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max
+- Valid Intervals: 1m, 5m, 15m, 1h, 1d, 1wk, 1mo
 
 2. Period Mode (4 Arguments)
 Use this mode to fetch data between two specific Unix timestamps.
-Syntax: ./yahoo_historical.sh <ticker> <start_timestamp> <end_timestamp> <interval>
 
 ```bash
+# Syntax: ./yahoo_historical.sh <ticker> <start_timestamp> <end_timestamp> <interval>
+
 # Fetch 1-hour interval data between two specific dates
 ./yahoo_historical.sh TSLA 1704067200 1711929600 1h > TSLA_hourly.csv
 ```
