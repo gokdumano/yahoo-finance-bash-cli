@@ -120,20 +120,25 @@ build_screener_payload() {
 parse_json_to_csv() {
     jq -r '
         # 1. Output the CSV Header
-        (["Ticker","Company_Name","Price","Change_Pct","Volume","Market_Cap","Sector","Industry"] | @csv),
+        (["Ticker","Company_Name","Sector","Industry","Price","Change","Change_Pct","Volume","Avg_Vol_3m","PE_Ratio","Market_Cap","52W_Low","52W_High"] | @csv),
         
         # 2. Parse the records array
         (
             .finance.result[0].records[]? | 
             [
                 .ticker, 
-                .companyshortname, 
-                (.intradayprice // null), 
-                (.percentchange // null), 
-                (.dayvolume // null), 
-                (.intradaymarketcap // null),
+                .companyName, 
                 (.sector // null),
-                (.industry // null)
+                (.industry // null),
+                (.regularMarketPrice.raw // null), 
+                (.regularMarketChange.raw // null), 
+                (.regularMarketChangePercent.raw // null), 
+                (.regularMarketVolume.raw // null), 
+                (.avgDailyVol3m.raw // null),
+                (.peRatioLtm.raw // null),
+                (.marketCap.raw // null),
+                (.fiftyTwoWeekLow.raw // null), 
+                (.fiftyTwoWeekHigh.raw // null)
             ] | @csv
         )
     '
