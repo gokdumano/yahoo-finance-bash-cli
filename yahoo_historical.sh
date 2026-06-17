@@ -4,7 +4,7 @@
 # CONSTANTS & CONFIGURATION
 # ==========================================
 readonly USER_AGENT="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-readonly BASE_URL="https://query1.finance.yahoo.com/v8/finance/chart"
+readonly CHART_URL="https://query1.finance.yahoo.com/v8/finance/chart"
 readonly VALID_RANGES="^(1d|5d|1mo|3mo|6mo|1y|2y|5y|10y|ytd|max)$"
 readonly VALID_INTERVALS="^(1m|5m|15m|1h|1d|1wk|1mo)$"
 
@@ -104,7 +104,7 @@ get_data_by_period(){
       --data-urlencode "period2=${period2}"   \
       --data-urlencode "interval=${interval}" \
       --data-urlencode "events=div,splits"    \
-      --url "${BASE_URL}/${ticker}"           \
+      --url "${CHART_URL}/${ticker}"           \
     | parse_json_to_csv
     
     return ${PIPESTATUS[0]} # Return the exit code of curl
@@ -157,7 +157,7 @@ get_data_by_range(){
               --data-urlencode "range=${range}"       \
               --data-urlencode "interval=${interval}" \
               --data-urlencode "events=div,splits"    \
-              --url "${BASE_URL}/${ticker}"           \
+              --url "${CHART_URL}/${ticker}"           \
             | parse_json_to_csv
             return ${PIPESTATUS[0]}
         ;;
