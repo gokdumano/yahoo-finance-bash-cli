@@ -1,6 +1,25 @@
 #!/bin/bash
 
 # ==========================================
+# STRICT MODE & ERROR HANDLING
+# ==========================================
+# 'e': Exit immediately if a command exits with a non-zero status.
+# 'u': Treat unset variables as an error and exit immediately.
+# 'o pipefail': Return value of a pipeline is the status of the last command to exit with a non-zero status.
+set -euo pipefail
+
+# ==========================================
+# DEPENDENCY CHECKS
+# ==========================================
+# Ensure required commands are available in the system before proceeding.
+for cmd in curl jq; do
+    if ! command -v "$cmd" &> /dev/null; then
+        echo "ERROR: Required command '$cmd' is not installed or not in PATH." >&2
+        exit 1
+    fi
+done
+
+# ==========================================
 # CONSTANTS & CONFIGURATION
 # ==========================================
 readonly USER_AGENT="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
